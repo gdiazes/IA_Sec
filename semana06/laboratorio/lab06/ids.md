@@ -1,4 +1,4 @@
-# PARTE 1: GUÍA DE PRÁCTICA DE LABORATORIO
+# GUÍA DE PRÁCTICA DE LABORATORIO
 
 ### **MÓDULO:** Inteligencia Artificial Aplicada a la Ciberseguridad  
 ### **PRÁCTICA:** Pipeline de Detección de Intrusiones (IDS): Entrenamiento, Serialización e Inferencia en Caliente
