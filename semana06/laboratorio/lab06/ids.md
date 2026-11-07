@@ -189,7 +189,7 @@ En un Centro de Operaciones de Seguridad (SOC), la visualización de tráfico be
 
 ### 3. RÚBRICA ANALÍTICA DE EVALUACIÓN DOCENTE
 
-| Criterio | Nivel Insuficiente (0 - 1.0) | Nivel Competente (1.1 - 2.0) | Nivel Sobresaliente (2.1 - 3.0) |
+| Criterio |  Insuficiente (0 - 1.0) |  Competente (1.1 - 2.0) |  Sobresaliente (2.1 - 3.0) |
 | :--- | :--- | :--- | :--- |
 | **Arquitectura Desacoplada e Ingesta (Paso 5)** | Se reutilizan variables en memoria RAM (`X_test`); no se evidencia la lectura independiente de archivos. | Se genera el archivo CSV, pero no se eliminan las variables de control o se manipula la estructura de columnas erróneamente. | El modelo `.joblib` y el archivo `trafico_nuevo_capturado.csv` son cargados de forma completamente desacoplada y funcional. |
 | **Comprensión Conceptual (Random Forest)** | No se distingue entre un clasificador simple y un ensamble; la terminología es incorrecta. | Se define el concepto de ensamble, pero no se logra explicar el rol de la técnica de *Bagging* ante el sobreajuste. | Se articulan con precisión los mecanismos de votación mayoritaria, subespacio de variables y reducción de varianza en red. |
