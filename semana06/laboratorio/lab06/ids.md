@@ -187,10 +187,28 @@ En un Centro de Operaciones de Seguridad (SOC), la visualización de tráfico be
 
 
 
-### 3. RÚBRICA ANALÍTICA DE EVALUACIÓN DOCENTE
+A continuación, se presenta la **Rúbrica Analítica de Evaluación adaptada al Sistema Vigesimal (0 a 20 puntos)**, estructurada en cinco criterios técnicos que cubren la totalidad de la práctica y el reto. 
 
-| Criterio |  Insuficiente (0 - 1.0) |  Competente (1.1 - 2.0) |  Sobresaliente (2.1 - 3.0) |
-| :--- | :--- | :--- | :--- |
-| **Arquitectura Desacoplada e Ingesta (Paso 5)** | Se reutilizan variables en memoria RAM (`X_test`); no se evidencia la lectura independiente de archivos. | Se genera el archivo CSV, pero no se eliminan las variables de control o se manipula la estructura de columnas erróneamente. | El modelo `.joblib` y el archivo `trafico_nuevo_capturado.csv` son cargados de forma completamente desacoplada y funcional. |
-| **Comprensión Conceptual (Random Forest)** | No se distingue entre un clasificador simple y un ensamble; la terminología es incorrecta. | Se define el concepto de ensamble, pero no se logra explicar el rol de la técnica de *Bagging* ante el sobreajuste. | Se articulan con precisión los mecanismos de votación mayoritaria, subespacio de variables y reducción de varianza en red. |
-| **Resolución del Reto en Caliente** | El bucle imprime todo el tráfico (incluyendo benigno) o se procesa por lotes estáticos sin cadencia temporal. | Las alertas son filtradas, pero se omiten metadatos requeridos (puerto objetivo, marca temporal) o falla la lectura registro a registro. | La rutina simula flujo en tiempo real registro a registro, descarta el tráfico benigno y emite alertas con formato estructurado de SOC. |
+La redacción se mantiene estrictamente en **voz pasiva** y en **tercera persona**:
+
+---
+
+### RÚBRICA DE EVALUACIÓN 
+
+| Criterio de Evaluación | En Inicio / Insuficiente | En Proceso / Regular | Logrado / Competente | Destacado / Sobresaliente | Puntaje Máximo |
+| :--- | :--- | :--- | :--- | :--- | :---: |
+| **1. Saneamiento y Preparación de Telemetría** | Valores nulos o infinitos no son gestionados, impidiendo el entrenamiento; o las variables son manipuladas sin criterio técnico.<br>**(0 - 1.0 pts)** | Los registros anómalos son eliminados, pero la estratificación (`stratify=y`) es omitida o las columnas no numéricas son forzadas.<br>**(1.5 - 2.0 pts)** | Los datos son saneados adecuadamente y la muestra independiente `trafico_nuevo_capturado.csv` es exportada sin fuga de información.<br>**(2.5 - 3.0 pts)** | El saneamiento es óptimo; los valores `inf` y `NaN` son depurados, los tipos de dato son validados y el particionamiento estratificado es aplicado con rigurosidad.<br>**(3.5 - 4.0 pts)** | **/ 4.0** |
+| **2. Entrenamiento y Persistencia del Modelo (`joblib`)** | El clasificador no logra converger por fallos de sintaxis o el archivo binario `.joblib` no es exportado al almacenamiento local.<br>**(0 - 1.0 pts)** | El modelo es entrenado, pero los hiperparámetros no son configurados o la serialización presenta dependencias de rutas absolutas rotas.<br>**(1.5 - 2.0 pts)** | El algoritmo *Random Forest* es instanciado y ajustado correctamente; el archivo `.joblib` es persistido sin errores estructurales.<br>**(2.5 - 3.0 pts)** | El modelo es ajustado con paralelismo (`n_jobs=-1`), la semilla aleatoria es controlada y el artefacto `.joblib` es exportado de manera reproducible.<br>**(3.5 - 4.0 pts)** | **/ 4.0** |
+| **3. Ingesta Desacoplada e Inferencia (Paso 5)** | Se reutilizan variables activas de la memoria RAM (`X_test`); no se comprueba la lectura independiente de archivos externos.<br>**(0 - 1.0 pts)** | El archivo `trafico_nuevo_capturado.csv` es leído, pero se alteran los esquemas de columnas, provocando advertencias o reajustes forzados.<br>**(1.5 - 2.0 pts)** | El modelo `.joblib` y la nueva telemetría `.csv` son cargados de forma desacoplada; los veredictos predictivos son asignados y mostrados.<br>**(2.5 - 3.0 pts)** | La sesión de inferencia opera de forma autónoma: el modelo es deserializado, el archivo CSV externo es consumido y la salida es tabulada con precisión forense.<br>**(3.5 - 4.0 pts)** | **/ 4.0** |
+| **4. Resolución del Reto: Motor en Caliente y Filtrado de Alertas** | El flujo continuo no es simulado; el código imprime la totalidad del tráfico (incluyendo eventos benignos) o colapsa por fallos de dimensión.<br>**(0 - 1.5 pts)** | La lectura fila a fila es lograda, pero el tráfico benigno no es silenciado en su totalidad o la latencia de red no es emulada.<br>**(2.0 - 3.0 pts)** | El tráfico `Benign` es descartado en silencio y las alertas son emitidas en caliente al detectar ataques, aunque faltan metadatos clave.<br>**(3.5 - 4.0 pts)** | La emulación en streaming procesa registro a registro de forma óptima; el tráfico benigno es silenciado y las alertas son generadas con formato SOC (marca de tiempo precisa, vector de ataque y puerto objetivo).<br>**(4.5 - 5.0 pts)** | **/ 5.0** |
+| **5. Dominio Conceptual y Sustentación Técnica** | La justificación teórica es errónea; no se distingue entre un árbol individual y un ensamble basado en bosque aleatorio.<br>**(0 - 0.5 pts)** | La definición de *Random Forest* es memorística; no se logra fundamentar por qué la técnica mitiga el sobreajuste ante tráfico de red.<br>**(1.0 - 1.5 pts)** | Los principios de subespacio aleatorio de variables (*feature subspacing*) y votación mayoritaria son explicados con claridad técnica.<br>**(2.0 - 2.5 pts)** | El funcionamiento integral de *Bagging*, la descorrelación de árboles y la justificación del uso de `joblib` para entornos de producción son expuestos con solvencia y rigor profesional.<br>**(2.6 - 3.0 pts)** | **/ 3.0** |
+| **PUNTAJE TOTAL** | | | | | **/ 20.0** |
+
+---
+
+### ESCALA DE CONVERSIÓN CUALITATIVA VIGESIMAL
+
+* **18.0 - 20.0 (Sobresaliente / Nivel Avanzado):** El pipeline y el motor en caliente operan bajo estándares de producción; el código es modular y la sustentación conceptual demuestra dominio integral de la solución.
+* **14.0 - 17.9 (Aprobado / Nivel Competente):** Los requerimientos técnicos y el filtrado del reto son resueltos de forma satisfactoria, con detalles menores en la estructuración de alertas o en la justificación teórica.
+* **11.0 - 13.9 (Aprobado Elemental / Nivel Básico):** El flujo básico de entrenamiento e inferencia funciona, pero persisten deficiencias en el desacople de datos o en la emulación registro a registro del reto.
+* **00.0 - 10.9 (Desaprobado / No Logrado):** Errores críticos impiden la ejecución del pipeline, no se logra la serialización del modelo o el reto de detección en caliente no es implementado.
