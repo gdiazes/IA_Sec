@@ -187,11 +187,7 @@ En un Centro de Operaciones de Seguridad (SOC), la visualización de tráfico be
 
 
 
-A continuación, se presenta la **Rúbrica Analítica de Evaluación adaptada al Sistema Vigesimal (0 a 20 puntos)**, estructurada en cinco criterios técnicos que cubren la totalidad de la práctica y el reto. 
 
-La redacción se mantiene estrictamente en **voz pasiva** y en **tercera persona**:
-
----
 
 ### RÚBRICA DE EVALUACIÓN 
 
